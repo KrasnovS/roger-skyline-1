@@ -1,15 +1,11 @@
-# roger-skyline-1
-Basics commands and first reflexes in system and network administration.
-
-
 # Roger-skyline-1
 
-### 1.	Установка виртуальной машины и ОС
+### 1.	VM installation
 
 - Скачать образ отсюда [Debian] (debian-9.9.0-i386-netinst.iso)
 - в ходе установки разбить диск согласно условиям задания.
 ***
-### 2.  	Проверка обновлений и настройка sudo
+### 2.  Check for updates and configure sudo
 
 Обнавляе Debian на VM: 
 ```
@@ -32,7 +28,7 @@ prawney         ALL=(ALL:ALL) ALL
 $ adduser prawney sudo
 ```
 ***
-### 3. 	Установка статического IP
+### 3. 	Set static IP
 - Отредактируй файл `sudo vim /etc/network/interfaces`:
 ```
 # This file describes the network interfaces available on your system
@@ -58,7 +54,7 @@ $ sudo /etc/init.d/networking restart
 ifup enp0s3
 ```
 ***
-### 4. 	Настройка SSH
+### 4. SSH setup
 
 - Редактируем файл на VM vim /etc/ssh/sshd_config следующим образом
 ```
