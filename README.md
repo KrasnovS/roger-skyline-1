@@ -4,7 +4,7 @@ Basics commands and first reflexes in system and network administration.
 
 # Roger-skyline-1
 
-##### 1.	Установка виртуальной машины и ОС
+### 1.	Установка виртуальной машины и ОС
 
 - скачать образ отсюда [Debian] (debian-9.9.0-i386-netinst.iso)
 - открыть VirtualBox и создать VM в goinfre в папке юзера (твоей папке) на этапе “File location and size”
@@ -19,7 +19,7 @@ Basics commands and first reflexes in system and network administration.
 В разделе “Software selection” выбираю только SSH server и Standart system utilities
 С этой частью все. Посмотреть итог lsblk
 
-##### 2.  	Проверка обновлений и настройка sudo
+### 2.  	Проверка обновлений и настройка sudo
 
 В терминали ВМ пишем следющее: 
 ```
@@ -41,7 +41,7 @@ prawney     ALL=(ALL:ALL) ALL
 ```
 $ adduser prawney sudo
 ```
-##### 3. 	Установка статического IP
+### 3. 	Установка статического IP
 - отредактируй файл `sudo vim /etc/network/interfaces` следующим образом:
 ```
 # This file describes the network interfaces available on your system
@@ -66,7 +66,7 @@ $ sudo /etc/init.d/networking restart
 ```
 ifup enp0s3
 ```
-##### 4. 	Настройка SSH
+### 4. 	Настройка SSH
 
 - Редактируем файл на ВМ vim /etc/ssh/sshd_config следующим образом
 ```
@@ -99,7 +99,7 @@ PasswordAuthentification no
 ```
 $ sudo /etc/init.d/ssh restart
 ```
-##### 5. 	Firewall
+### 5. 	Firewall
 - В терминале на ВМ пишешь:
 ```
 $ sudo ufw status
@@ -115,7 +115,7 @@ $ sudo ufw reload
 >SSH : sudo ufw allow 90/tcp 
 >HTTP : sudo ufw allow 80/tcp
 >HTTPS : sudo ufw allow 443
-##### 6. 	DOS (Denial Of Service Attack) protection
+### 6. 	DOS (Denial Of Service Attack) protection
 - редактируешь файл следующим образом `sudo vim /etc/fail2ban/jail.conf`
 ```
 [sshd]
@@ -175,7 +175,7 @@ sudo fail2ban-client set sshd unbanip 10.0.2.2
 sudo fail2ban-client set apache-dos unbanip 10.0.2.2
 ```
 
-##### 7. 	Protection port scans
+### 7. 	Protection port scans
 - Редактируешь файл следующим образом `sudo vim /etc/default/portsentry`
 ```
 TCP_MODE="atcp"
@@ -194,7 +194,7 @@ KILL_ROUTE="/sbin/iptables -I INPUT -s $TARGET$ -j DROP"
 sudo /etc/init.d/portsentry restart
 ```
 
- ##### 8.	Stop the services
+ ### 8.	Stop the services
  - Смотрим наши сервисы:
  ```
 ls -l /etc/init.d
@@ -213,7 +213,7 @@ sudo service service_name stop
 sudo systemctl disable service_name
 ```
 
-##### 9.	 Update Packages
+### 9.	 Update Packages
 - Создаем файл для логов:  `sudo vim /var/log/update_script.log`
 - Создаем скрипт: `sudo vim /root/update_script.sh`:
 ```
@@ -227,7 +227,7 @@ apt upgrade -y >> /var/log/update_script.log
 0 4 * * 1 root /root/update_script.sh
 @reboot root /root/update_script.sh
 ```
-##### 10. 	Monitor Crontab Changes
+### 10. 	Monitor Crontab Changes
 - Создаем скрипт `sudo vim /root/crontab_monitor.sh`:
 ```
 #!/bin/bash
@@ -250,11 +250,11 @@ fi
 ```
 - Создаем свой mail.txt, например `Fail /etc/crontab changed.`
 - Включаешь крон `sudo systemctl enable cron`
-##### 11.	Web Part
+### 11.	Web Part
 - Создаем сайт и перемещаем его в  `/var/www/html/index.html`
 - Подключаемся и проверяем
 
-##### 12.	Configure SSL
+### 12.	Configure SSL
 - Генерируем самоподписанный ключ `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt`
 - Cоздаем файл  `sudo vim /etc/apache2/ssl-params.conf`:
 ```
@@ -286,7 +286,7 @@ BrowserMatch "MSIE [2-6]" \
 ```
 Redirect "/" "https://127.0.0.1/"
 ```
-- Добавдяем в фаерволл https и перезапускаем:
+- Добавляем в фаерволл https и перезапускаем:
  ```
  sudo ufw allow 4443
  sudo ufw reload
@@ -300,7 +300,7 @@ sudo a2ensite default-ssl
 sudo a2enconf ssl-params
 sudo systemctl reload apache2
 ```
-##### 13. 	Part Deployment
+### 13. 	Part Deployment
 - Копируем репозиторий на Mac и VM
 
 - Пушим сайт на Git
@@ -334,7 +334,7 @@ sudo systemctl reload apache2
 
 - Теперь любые изменения которые мы запушили с Мака, можно сразу получить на VM и увидеть на сайте командой git pull.
 ***
-**Спасибо за внимание!**
+**Спасибо за внимание!** 😈
 
    [Debian]: <https://cdimage.debian.org/debian-cd/current/i386/iso-cd/>
 
